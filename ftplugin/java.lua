@@ -66,6 +66,9 @@ local config = {
 		vim.keymap.set("n", "<leader>dtc", require("jdtls").test_class, opts)
 		vim.keymap.set("n", "<leader>dtm", require("jdtls").test_nearest_method, opts)
 
+		-- Reload Maven/Gradle project config (e.g. after editing pom.xml dependency versions)
+		vim.keymap.set("n", "<leader>ju", require("jdtls").update_project_config, opts)
+
 		-- Print the JAR name the current buffer belongs to (or project name if a source file)
 		vim.keymap.set("n", "<leader>pn", function()
 			local bufname = vim.api.nvim_buf_get_name(bufnr)
