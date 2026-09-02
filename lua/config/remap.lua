@@ -83,3 +83,9 @@ local function retab()
 end
 
 vim.keymap.set("n", "<leader>rt", retab, { desc = "Retab: convert tabs to spaces" })
+
+vim.keymap.set("n", "<leader>pwd", function()
+	local cwd = vim.fn.getcwd()
+	vim.fn.setreg("+", cwd)
+	vim.notify("Copied: " .. cwd)
+end, { desc = "Copy cwd to clipboard" })
