@@ -97,3 +97,18 @@ vim.keymap.set("n", "<leader>pwf", function()
 end, { desc = "Copy full file path to clipboard" })
 
 vim.keymap.set("n", "<leader>tf", vim.cmd.ToggleAutoformat, { desc = "Toggle autoformat on save" })
+
+vim.keymap.set("n", "<leader>pwc", function()
+	if vim.bo.filetype ~= "java" then
+		vim.notify("Not in configured file type", vim.log.levels.WARN)
+		return
+	end
+
+	-- Mirrors the workspace_dir logic in ftplugin/java.lua
+	local root_dir = vim.fs.root(0, { "gradlew", "mvnw", ".git", "pom.xml", "build.gradle" }) or vim.fn.getcwd()
+	local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
+	local workspace_dir = vim.fn.expand("~/.cache/nvim/jdtls/workspaces/") .. project_name
+
+	vim.fn.setreg("+", workspace_dir)
+	vim.notify("Copied: " .. workspace_dir)
+end, { desc = "Copy jdtls cache/workspace path for current project" })
