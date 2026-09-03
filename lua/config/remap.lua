@@ -95,3 +95,5 @@ vim.keymap.set("n", "<leader>pwf", function()
 	vim.fn.setreg("+", path)
 	vim.notify("Copied: " .. path)
 end, { desc = "Copy full file path to clipboard" })
+
+vim.keymap.set("n", "<leader>tf", vim.cmd.ToggleAutoformat, { desc = "Toggle autoformat on save" })

@@ -50,6 +50,14 @@ conform.setup({
 
 vim.g.autoformat = true
 
+-- Shown in the statusline so autoformat state is always visible
+function _G.AutoformatStatus()
+	return vim.g.autoformat and "[Autofmt]" or "[Autofmt: off]"
+end
+
+vim.opt.laststatus = 2
+vim.opt.statusline = "%<%f %h%m%r %{v:lua.AutoformatStatus()} %=%-14.(%l,%c%V%) %P"
+
 vim.api.nvim_create_user_command("ToggleAutoformat", function()
 	vim.g.autoformat = not vim.g.autoformat
 	require("conform").setup({
