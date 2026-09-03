@@ -47,6 +47,10 @@ local config = {
 	on_attach = function(client, bufnr)
 		on_attach_remap(client, bufnr)
 
+		-- Register the java DAP adapter and discover main classes
+		require("jdtls").setup_dap({ hotcodereplace = "auto", config_overrides = {} })
+		require("jdtls.dap").setup_dap_main_class_configs()
+
 		local opts = { buffer = true, silent = true }
 
 		vim.keymap.set("n", "<C-o>", require("jdtls").organize_imports, opts) -- TODO add to: gopls, tsserver, pylsp
